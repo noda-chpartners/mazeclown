@@ -4,7 +4,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-	site: process.env.PUBLIC_SITE_URL,
+	site: 'https://mazera-clown.pages.dev',
 	integrations: [
 		icon({
 			include: {
