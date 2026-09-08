@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import mazera from '../assets/images/mazera.jpg';
+import torisio from '../assets/images/torisio.jpg';
+import syouyu from '../assets/images/syouyu.jpg';
+import interior1 from '../assets/images/line_oa_chat_260907_204642_group_0.jpg';
+import interior2 from '../assets/images/line_oa_chat_260907_204642_group_1.jpg';
+import poster from '../assets/images/IMG_0523.jpeg';
+
+const imageMap = {
+	mazera,
+	torisio,
+	syouyu,
+	interior1,
+	interior2,
+	poster,
+} as const;
+
+export type ImageName = keyof typeof imageMap;
+
+interface Props {
+	name: ImageName;
+	alt: string;
+	class?: string;
+	widths?: number[];
+	sizes?: string;
+	loading?: 'lazy' | 'eager';
+	fetchpriority?: 'high' | 'low' | 'auto';
+	quality?: number;
+	decoding?: 'async' | 'auto' | 'sync';
+}
+
+const {
+	name,
+	alt,
+	class: className,
+	widths = [480, 800, 1200, 1600],
+	sizes = '(max-width: 768px) 100vw, 50vw',
+	loading = 'lazy',
+	fetchpriority = 'auto',
+	quality = 80,
+	decoding = 'async',
+} = Astro.props;
+---
+
+<Image
+	src={imageMap[name]}
+	alt={alt}
+	class={className}
+	widths={widths}
+	sizes={sizes}
+	loading={loading}
+	fetchpriority={fetchpriority}
+	quality={quality}
+	decoding={decoding}
+/>

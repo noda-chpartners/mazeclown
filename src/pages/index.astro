@@ -1,17 +1,310 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Images from '../components/Images.astro';
+import { Icon } from 'astro-icon/components';
 
+const mapSrc =
+	'https://maps.google.com/maps?q=埼玉県川口市蓮沼298-8&hl=ja&z=16&output=embed';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<a class="visually-hidden" href="#main">本文へ移動</a>
+	<Header />
+	<main id="main">
+		<section class="hero" id="top">
+			<div class="hero__grid">
+				<div>
+					<p class="hero__en" data-hero-item>Kawaguchi / Hatogaya</p>
+					<h1 class="hero__title" data-hero-item>
+						<span>まぜらー</span>
+						<span>くらうん</span>
+						<span class="visually-hidden">川口市蓮沼のまぜらー・らーめん</span>
+					</h1>
+					<p class="hero__catch" data-hero-item>混ぜて喰らえ。</p>
+					<ul class="hero__meta" data-hero-item>
+						<li>カウンター 8席</li>
+						<li>水曜定休</li>
+						<li>平日 11:00-19:00</li>
+					</ul>
+				</div>
+				<div class="hero__poster" data-hero-item>
+					<Images
+						name="mazera"
+						alt="まぜらーくらうんの看板メニュー、まぜらー"
+						class="hero__poster-img"
+						loading="eager"
+						fetchpriority="high"
+						sizes="(max-width: 768px) 72vw, 288px"
+					/>
+				</div>
+			</div>
+			<a class="hero__scroll" href="#menu">
+				メニューを見る
+				<Icon name="lucide:arrow-down" class="icon" />
+			</a>
+		</section>
+
+		<section class="photo-band" aria-label="看板は、まぜらー。">
+			<Images
+				name="mazera"
+				alt="まぜらーの俯瞰写真。チャーシュー、卵黄、ネギ、揚げ玉ねぎ"
+				class="photo-band__img"
+				sizes="100vw"
+				widths={[640, 960, 1280, 1920]}
+			/>
+			<div class="photo-band__veil"></div>
+			<div class="photo-band__copy" data-reveal>
+				<p>看板は、まぜらー。</p>
+			</div>
+		</section>
+
+		<section class="section section--paper" id="concept" aria-labelledby="concept-heading">
+			<div class="wrap">
+				<div class="section-head" data-reveal>
+					<p class="section-en">About</p>
+					<h2 class="section-title" id="concept-heading">店について</h2>
+					<p class="section-lead">
+						まぜらーくらうんは、埼玉県川口市蓮沼にあるカウンター8席の店です。看板は、濃厚だれと具を自分で混ぜて食べるまぜらー。とり塩らーめん、背脂醤油らーめんも置いています。
+					</p>
+				</div>
+				<div class="concept__grid">
+					<div class="concept__photo" data-reveal>
+						<Images
+							name="interior1"
+							alt="まぜらーくらうん店内。アメリカンレトロな雑貨と照明"
+							class="concept__img"
+							sizes="(max-width: 768px) 100vw, 50vw"
+						/>
+					</div>
+					<div class="concept__copy" data-reveal>
+						<p>
+							店内は、看板やフィギュア、照明がひしめくアメリカンレトロな空間です。席はカウンターのみ。一人でも、並んででも、熱い一杯をどうぞ。
+						</p>
+						<ul class="facts">
+							<li>
+								<Icon name="lucide:map-pin" class="icon" />
+								<div>
+									<div>住所</div>
+									<address>〒334-0064 埼玉県川口市蓮沼298-8</address>
+								</div>
+							</li>
+							<li>
+								<Icon name="lucide:bus" class="icon" />
+								<div>
+									<div>最寄り</div>
+									<div>鳩ヶ谷駅からバス</div>
+								</div>
+							</li>
+							<li>
+								<Icon name="lucide:users" class="icon" />
+								<div>
+									<div>席数</div>
+									<div>カウンター 8席</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="menu" aria-labelledby="menu-heading">
+			<div class="wrap">
+				<div class="section-head" data-reveal>
+					<p class="section-en">Menu</p>
+					<h2 class="section-title" id="menu-heading">メニュー</h2>
+					<p class="section-lead">まぜらー、とり塩、背脂醤油。芯のある三杯です。</p>
+				</div>
+				<div class="menu-list" data-stagger>
+					<article class="menu-card" data-stagger-item>
+						<Images
+							name="mazera"
+							alt="まぜらーくらうんのまぜらー。チャーシュー、卵黄、ネギ、きくらげ、揚げ玉ねぎ"
+							class="menu-card__photo"
+							sizes="(max-width: 768px) 100vw, 33vw"
+						/>
+						<div class="menu-card__body">
+							<p class="menu-card__index">01</p>
+							<h3 class="menu-card__name">まぜらー</h3>
+							<p class="menu-card__text">
+								濃厚だれに、レア寄りのチャーシュー、卵黄、ネギ、揚げ玉ねぎ。混ぜて喰らう、当店の看板です。
+							</p>
+						</div>
+					</article>
+					<article class="menu-card" data-stagger-item>
+						<Images
+							name="torisio"
+							alt="まぜらーくらうんのとり塩らーめん。鶏塩スープにチャーシューとネギ"
+							class="menu-card__photo"
+							sizes="(max-width: 768px) 100vw, 33vw"
+						/>
+						<div class="menu-card__body">
+							<p class="menu-card__index">02</p>
+							<h3 class="menu-card__name">とり塩らーめん</h3>
+							<p class="menu-card__text">
+								鶏の旨みをすくう塩スープ。さっぱり見えて、芯がある一杯です。
+							</p>
+						</div>
+					</article>
+					<article class="menu-card" data-stagger-item>
+						<Images
+							name="syouyu"
+							alt="まぜらーくらうんの背脂醤油らーめん。醤油スープにチャーシューとネギ"
+							class="menu-card__photo"
+							sizes="(max-width: 768px) 100vw, 33vw"
+						/>
+						<div class="menu-card__body">
+							<p class="menu-card__index">03</p>
+							<h3 class="menu-card__name">背脂醤油らーめん</h3>
+							<p class="menu-card__text">
+								生姜の香りと背脂のコクが乗る醤油らーめん。店頭ポスターの、あの味です。
+							</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section--paper" id="shop" aria-labelledby="shop-heading">
+			<div class="wrap">
+				<div class="section-head" data-reveal>
+					<p class="section-en">Shop</p>
+					<h2 class="section-title" id="shop-heading">店内</h2>
+					<p class="section-lead">カウンターに、看板と照明がぎっしり。8席だけの店です。</p>
+				</div>
+				<div class="shop__grid" data-stagger>
+					<div class="shop__photo" data-stagger-item>
+						<Images
+							name="interior1"
+							alt="まぜらーくらうんの厨房側。看板とフィギュアが並ぶカウンター奥"
+							class="shop__img"
+							sizes="(max-width: 768px) 100vw, 36vw"
+						/>
+					</div>
+					<div class="shop__photo" data-stagger-item>
+						<Images
+							name="interior2"
+							alt="まぜらーくらうんの客席側。木のカウンターとメニューボード"
+							class="shop__img"
+							sizes="(max-width: 768px) 100vw, 36vw"
+						/>
+					</div>
+					<div class="shop-facts" data-stagger-item>
+						<div class="shop-fact">
+							<p class="shop-fact__label">
+								<Icon name="lucide:users" class="icon" />
+								席
+							</p>
+							<strong>カウンター 8席</strong>
+						</div>
+						<div class="shop-fact">
+							<p class="shop-fact__label">
+								<Icon name="lucide:clock" class="icon" />
+								営業
+							</p>
+							<strong>11:00 オープン</strong>
+						</div>
+						<div class="shop-fact">
+							<p class="shop-fact__label">
+								<Icon name="lucide:calendar-off" class="icon" />
+								定休
+							</p>
+							<strong>毎週水曜日</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="access" aria-labelledby="access-heading">
+			<div class="wrap">
+				<div class="section-head" data-reveal>
+					<p class="section-en">Access</p>
+					<h2 class="section-title" id="access-heading">案内</h2>
+					<p class="section-lead">電話番号はありません。来店前はInstagramか、Googleの情報をご確認ください。</p>
+				</div>
+				<div class="access__grid">
+					<div data-reveal>
+						<ul class="facts">
+							<li>
+								<Icon name="lucide:map-pin" class="icon" />
+								<div>
+									<div>住所</div>
+									<address>〒334-0064 埼玉県川口市蓮沼298-8</address>
+								</div>
+							</li>
+							<li>
+								<Icon name="lucide:bus" class="icon" />
+								<div>
+									<div>最寄り</div>
+									<div>鳩ヶ谷駅からバス</div>
+								</div>
+							</li>
+							<li>
+								<Icon name="lucide:utensils" class="icon" />
+								<div>
+									<div>席数</div>
+									<div>カウンター 8席</div>
+								</div>
+							</li>
+						</ul>
+						<table class="hours">
+							<caption class="visually-hidden">営業時間</caption>
+							<tbody>
+								<tr>
+									<th scope="row">月・火・木・金・土・祝</th>
+									<td>
+										<time datetime="11:00">11:00</time> 〜 <time datetime="19:00">19:00</time>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">日曜日</th>
+									<td>
+										<time datetime="11:00">11:00</time> 〜 <time datetime="14:30">14:30</time>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">水曜日</th>
+									<td>定休日</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="cta-row">
+							<a
+								class="btn btn--solid"
+								href="https://www.instagram.com/mazera_clown/"
+								target="_blank"
+								rel="noopener noreferrer me"
+							>
+								<Icon name="simple-icons:instagram" class="icon" />
+								Instagram
+								<Icon name="lucide:external-link" class="icon" />
+							</a>
+							<a
+								class="btn btn--ghost"
+								href="https://share.google/8wK1vUyxKeI6M8o3n"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Icon name="simple-icons:google" class="icon" />
+								Google で見る
+								<Icon name="lucide:external-link" class="icon" />
+							</a>
+						</div>
+					</div>
+					<div class="map" data-reveal>
+						<iframe
+							title="まぜらーくらうんの地図"
+							src={mapSrc}
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+							allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

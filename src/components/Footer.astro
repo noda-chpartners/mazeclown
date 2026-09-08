@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<footer class="site-footer">
+	<div class="wrap site-footer__inner">
+		<p class="site-footer__name">まぜらーくらうん</p>
+		<address class="site-footer__meta">〒334-0064 埼玉県川口市蓮沼298-8</address>
+		<nav class="site-footer__links" aria-label="フッターリンク">
+			<a href="#menu">メニュー</a>
+			<a href="#access">案内</a>
+			<a href="https://www.instagram.com/mazera_clown/" target="_blank" rel="noopener noreferrer me">
+				<Icon name="simple-icons:instagram" class="icon" />
+				Instagram
+			</a>
+		</nav>
+		<p class="site-footer__copy">
+			<small>&copy; {new Date().getFullYear()} まぜらーくらうん</small>
+		</p>
+	</div>
+</footer>

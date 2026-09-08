@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="site-header" data-header>
+	<div class="site-header__bar">
+		<a class="site-header__logo" href="#top">まぜらーくらうん</a>
+		<button
+			class="site-header__toggle"
+			type="button"
+			data-menu-toggle
+			aria-expanded="false"
+			aria-controls="site-nav"
+		>
+			<span class="visually-hidden">メニューを開く</span>
+			<Icon name="lucide:menu" class="icon site-header__toggle-open" />
+			<Icon name="lucide:x" class="icon site-header__toggle-close" />
+		</button>
+		<nav class="site-header__nav" id="site-nav" data-nav aria-label="ページ内リンク">
+			<a href="#concept">店について</a>
+			<a href="#menu">メニュー</a>
+			<a href="#shop">店内</a>
+			<a href="#access">案内</a>
+			<a
+				class="site-header__sns"
+				href="https://www.instagram.com/mazera_clown/"
+				target="_blank"
+				rel="noopener noreferrer me"
+			>
+				<Icon name="simple-icons:instagram" class="icon" />
+				<span>Instagram</span>
+			</a>
+		</nav>
+	</div>
+</header>

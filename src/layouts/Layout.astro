@@ -1,0 +1,176 @@
+---
+import '../styles/global.css';
+import {
+	addressLocality,
+	addressRegion,
+	defaultDescription,
+	defaultTitle,
+	googleMapsUrl,
+	instagramUrl,
+	menuItems,
+	postalCode,
+	siteName,
+	siteNameEn,
+	streetAddress,
+} from '../data/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const title = Astro.props.title ?? defaultTitle;
+const description = Astro.props.description ?? defaultDescription;
+const origin = Astro.site ?? Astro.url.origin;
+const canonical = new URL(Astro.url.pathname, origin).href;
+const ogImage = new URL('/ogp.jpg', origin).href;
+const restaurantId = `${canonical}#restaurant`;
+const websiteId = `${canonical}#website`;
+const webpageId = `${canonical}#webpage`;
+const menuId = `${canonical}#menu`;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': websiteId,
+			url: canonical,
+			name: siteName,
+			inLanguage: 'ja',
+			publisher: { '@id': restaurantId },
+		},
+		{
+			'@type': 'WebPage',
+			'@id': webpageId,
+			url: canonical,
+			name: title,
+			description,
+			inLanguage: 'ja',
+			isPartOf: { '@id': websiteId },
+			about: { '@id': restaurantId },
+			primaryImageOfPage: ogImage,
+		},
+		{
+			'@type': 'Restaurant',
+			'@id': restaurantId,
+			name: siteName,
+			alternateName: [siteNameEn, 'まぜらー くらうん'],
+			description,
+			url: canonical,
+			image: [ogImage],
+			inLanguage: 'ja',
+			servesCuisine: ['ラーメン', 'らーめん', 'まぜそば'],
+			currenciesAccepted: 'JPY',
+			hasMap: googleMapsUrl,
+			address: {
+				'@type': 'PostalAddress',
+				postalCode,
+				addressRegion,
+				addressLocality,
+				streetAddress,
+				addressCountry: 'JP',
+			},
+			openingHours: ['Mo,Tu,Th,Fr,Sa 11:00-19:00', 'Su 11:00-14:30'],
+			openingHoursSpecification: [
+				{
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: ['Monday', 'Tuesday', 'Thursday', 'Friday', 'Saturday', 'PublicHolidays'],
+					opens: '11:00',
+					closes: '19:00',
+				},
+				{
+					'@type': 'OpeningHoursSpecification',
+					dayOfWeek: 'Sunday',
+					opens: '11:00',
+					closes: '14:30',
+				},
+			],
+			additionalProperty: [
+				{
+					'@type': 'PropertyValue',
+					name: '席数',
+					value: 'カウンター8席',
+				},
+				{
+					'@type': 'PropertyValue',
+					name: '定休日',
+					value: '水曜日',
+				},
+			],
+			sameAs: [instagramUrl, googleMapsUrl],
+			hasMenu: { '@id': menuId },
+		},
+		{
+			'@type': 'Menu',
+			'@id': menuId,
+			name: 'メニュー',
+			hasMenuSection: {
+				'@type': 'MenuSection',
+				name: 'らーめん',
+				hasMenuItem: menuItems.map((item) => ({
+					'@type': 'MenuItem',
+					name: item.name,
+					description: item.description,
+				})),
+			},
+		},
+	],
+};
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta
+			name="robots"
+			content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+		/>
+		<meta name="googlebot" content="index, follow" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="geo.region" content="JP-11" />
+		<meta name="geo.placename" content={`${addressLocality}${streetAddress}`} />
+		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="ja" href={canonical} />
+		<link rel="alternate" hreflang="x-default" href={canonical} />
+		<link rel="sitemap" href="/sitemap.xml" />
+		<meta name="theme-color" content="#E60012" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={`${siteName}の看板メニュー、まぜらー`} />
+		<meta property="og:url" content={canonical} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={`${siteName}の看板メニュー、まぜらー`} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	</head>
+	<body>
+		<slot />
+		<script>
+			import '../scripts/app.ts';
+		</script>
+	</body>
+</html>
