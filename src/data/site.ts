@@ -26,6 +26,6 @@ export const menuItems = [
 	},
 	{
 		name: '背脂醤油らーめん',
-		description: '生姜の香りと背脂のコクが乗る醤油らーめん。',
+		description: '生姜背脂と濃厚鶏出汁のこっさりな醤油らーめんです。',
 	},
 ] as const;

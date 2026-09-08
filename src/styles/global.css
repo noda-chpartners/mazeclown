@@ -237,7 +237,7 @@ body.is-menu-open .site-header__nav a:hover {
 	paint-order: stroke fill;
 }
 
-.hero__title span {
+.hero__title span:not(.visually-hidden) {
 	display: block;
 }
 
@@ -249,7 +249,7 @@ body.is-menu-open .site-header__nav a:hover {
 
 .hero__meta {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	gap: 0.6rem;
 	margin: 1.75rem 0 0;
 	padding: 0;
@@ -630,7 +630,39 @@ address {
 	}
 }
 
+@media (max-width: 1023px) {
+	.hero__title {
+		white-space: nowrap;
+		font-size: clamp(1.35rem, 6.2vw, 2.7rem);
+		letter-spacing: 0.01em;
+	}
+
+	.hero__title span:not(.visually-hidden) {
+		display: inline;
+	}
+
+	.hero__meta {
+		gap: 0.35rem;
+	}
+
+	.hero__meta li {
+		flex: 0 1 auto;
+		padding: 0.28rem 0.4rem;
+		font-size: clamp(0.58rem, 2.1vw, 0.74rem);
+		letter-spacing: 0.03em;
+		white-space: nowrap;
+	}
+
+	.hero__scroll {
+		display: none;
+	}
+}
+
 @media (max-width: 767px) {
+	.hero__title {
+		font-size: clamp(1.4rem, 8.2vw, 2.4rem);
+	}
+
 	.site-header__nav {
 		position: fixed;
 		inset: 0;
@@ -655,11 +687,6 @@ address {
 
 	.site-header__sns {
 		margin-top: 0.5rem;
-	}
-
-	.hero__scroll {
-		right: auto;
-		left: 1rem;
 	}
 }
 
