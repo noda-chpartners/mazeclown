@@ -659,8 +659,16 @@ address {
 }
 
 @media (max-width: 767px) {
+	.hero__grid > :first-child {
+		text-align: center;
+	}
+
 	.hero__title {
 		font-size: clamp(1.4rem, 8.2vw, 2.4rem);
+	}
+
+	.hero__meta {
+		justify-content: center;
 	}
 
 	.site-header__nav {
