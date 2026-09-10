@@ -3,7 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Images from '../components/Images.astro';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import heroBg from '../assets/images/ChatGPT Image 2026年9月9日 16_53_54.png';
 
 const mapSrc =
 	'https://maps.google.com/maps?q=埼玉県川口市蓮沼298-8&hl=ja&z=16&output=embed';
@@ -14,6 +16,18 @@ const mapSrc =
 	<Header />
 	<main id="main">
 		<section class="hero" id="top">
+			<div class="hero__bgs" aria-hidden="true">
+				<Image
+					src={heroBg}
+					alt=""
+					class="hero__bg"
+					widths={[480, 768, 1080]}
+					sizes="100vw"
+					loading="eager"
+					fetchpriority="high"
+					quality={80}
+				/>
+			</div>
 			<div class="hero__grid">
 				<div>
 					<p class="hero__en" data-hero-item>Kawaguchi / Hatogaya</p>
